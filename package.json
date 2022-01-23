@@ -1,0 +1,64 @@
+{
+  "name": "todo-app",
+  "description": "Webcomponent todo-app following open-wc recommendations",
+  "license": "MIT",
+  "author": "todo-app",
+  "version": "0.0.0",
+  "scripts": {
+    "lint": "eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "test": "karma start karma.conf.cjs",
+    "test:watch": "web-test-runner --watch",
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server",
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "@open-wc/building-rollup": "^2.0.1",
+    "deepmerge": "^4.2.2",
+    "lit": "^2.0.2"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@open-wc/eslint-config": "^4.3.0",
+    "@open-wc/testing": "^3.0.0-next.5",
+    "@open-wc/testing-karma": "^4.0.9",
+    "@web/dev-server": "^0.1.28",
+    "@web/test-runner": "^0.13.22",
+    "chai": "^4.3.4",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^4.3.8",
+    "karma": "^6.3.11",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-mocha": "^2.0.1",
+    "lint-staged": "^10.5.4",
+    "mocha": "^9.1.4",
+    "prettier": "^2.4.1",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-includepaths": "^0.2.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@open-wc",
+      "prettier"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "customElements": "custom-elements.json"
+}
