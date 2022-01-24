@@ -2,14 +2,13 @@
 import { createSpaConfig } from '@open-wc/building-rollup';
 import merge from 'deepmerge';
 import copy from 'rollup-plugin-copy';
-import includePaths from 'rollup-plugin-includepaths';
 
 // use createBasicConfig to do regular JS to JS bundling
 // import { createBasicConfig } from '@open-wc/building-rollup';
 
 const baseConfig = createSpaConfig({
   // use the outputdir option to modify where files are output
-  // outputDir: 'dist',
+  outputDir: 'docs',
 
   // if you need to support older browsers, such as IE11, set the legacyBuild
   // option to generate an additional build just for this browser
@@ -29,11 +28,10 @@ export default merge(baseConfig, {
 
   plugins: [
     copy({
-      targets: [{ src: 'assets', dest: './dist' }],
+      targets: [{ src: 'assets', dest: './docs' }],
       // set flatten to false to preserve folder structure
       flatten: true,
     }),
-    includePaths({ paths: ["./"] })
   ]
 
   // alternatively, you can use your JS as entrypoint for rollup and
