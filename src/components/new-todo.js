@@ -19,12 +19,11 @@ export class NewTodo extends LitElement {
     }
 
     notifyNewTodo() {
-        const event = new CustomEvent('add-todo', {
+        this.dispatchEvent(new CustomEvent('add-todo', {
             detail: {
                 taskName: this.inputVal,
             }
-        })
-        this.dispatchEvent(event)
+        }))
         this.inputVal = ''
     }
 

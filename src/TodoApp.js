@@ -37,7 +37,12 @@ export class TodoApp extends LitElement {
 
   tasksTemplate(completed) {
     const tasksSet = this.tasks.filter(task => task.completed === completed)
-    return tasksSet.map(task => html`<todo-item @delete-todo=${this.handleDeleteTodoEvent} @complete-todo=${this.handleCompleteTodoEvent} .task=${task}></todo-item>`)
+    return tasksSet.map(task => html`
+      <todo-item
+        @delete-todo=${this.handleDeleteTodoEvent}
+        @toogle-todo=${this.handleToogleTodoEvent}
+        .task=${task}>
+      </todo-item>`)
   }
 
   handleAddTodoEvent(e) {
@@ -52,14 +57,14 @@ export class TodoApp extends LitElement {
     }]
   }
 
-  handleCompleteTodoEvent(e) {
-    this.completeTodo(e.detail.todoId)
+  handleToogleTodoEvent(e) {
+    this.toogleTodo(e.detail.todoId)
   }
 
-  completeTodo(todoToCompleteId) {
-    const todoToComplete = this.tasks.find(task => task.id === todoToCompleteId)
-    todoToComplete.completed = true;
-    this.tasks = [...this.tasks.filter(task => task.id !== todoToCompleteId), todoToComplete]
+  toogleTodo(todoToToogleId) {
+    const todoToToogle = this.tasks.find(task => task.id === todoToToogleId)
+    todoToToogle.completed = !todoToToogle.completed;
+    this.tasks = [...this.tasks.filter(task => task.id !== todoToToogleId), todoToToogle]
   }
 
   handleDeleteTodoEvent(e) {

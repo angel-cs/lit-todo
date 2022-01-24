@@ -18,31 +18,32 @@ export class TodoItem extends LitElement {
         this.task = {}
     }
 
-    notifyDeleteTodo(e) {
-        e.preventDefault()
-        const event = new CustomEvent('delete-todo', {
+    emitId(eventName) {
+        this.dispatchEvent(new CustomEvent(eventName, {
             detail: {
                 todoId: this.task.id,
             }
-        })
-        this.dispatchEvent(event)
+        }))
     }
 
-    notifyCompleteTodo(e) {
-        e.preventDefault()
-        const event = new CustomEvent('complete-todo', {
-            detail: {
-                todoId: this.task.id,
-            }
-        })
-        this.dispatchEvent(event)
+    notifyDeleteTodo() {
+        this.emitId('delete-todo')
+    }
+
+    notifyToogleTodo() {
+        this.emitId('toogle-todo')
     }
 
     render() {
         return html`
             <h4>${this.task.task}</h4>
             <div class="todo-options">
-                ${!this.task.completed ? html`<a href='#' @click=${this.notifyCompleteTodo}>${uncheckedIcon}</a>` : html`<span>${checkedIcon}</span>`}
+                <a
+                    href='#'
+                    @click=${this.notifyToogleTodo}>${!this.task.completed
+                ? uncheckedIcon
+                : checkedIcon}
+                </a>
                 <a href='#' @click=${this.notifyDeleteTodo}>${deleteIcon}</a>
             </div>
         `;
